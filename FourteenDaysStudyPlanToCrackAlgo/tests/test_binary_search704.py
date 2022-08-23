@@ -1,11 +1,8 @@
 from pprint import pprint
 import unittest
 import sys
-sys.path.append('/Users/kurosawatomoyuki/ghq/github.com/kuropenguin/leetcode/14DaysStudyPlanToCrackAlgo/answers')
 
-
-# このpathを通してモジュールインポートしたい
-from answers.binary_search704 import Solution
+from FourteenDaysStudyPlanToCrackAlgo.answers.binary_search704 import Solution
 
 class BinarySearchTestCase(unittest.TestCase):
     def setUp(self):
