@@ -1,7 +1,15 @@
 from typing import List
+
+
 class Solution:
     def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
-        return [False, False]
+        result = [False] * len(candies)
+        max_of_candies = max(candies)
+        comparison = max_of_candies - extraCandies
+        for i in range(len(candies)):
+            if candies[i] >= comparison:
+                result[i] = True
+        return result
 
 
 solution = Solution()
