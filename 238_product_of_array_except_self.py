@@ -3,11 +3,21 @@ from typing import List
 
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
+        pre = [1] * len(nums)
+        for idx in range(0, len(nums)):
+            if idx == 0:
+                pre[idx] = 1
+            else:
+                pre[idx] = pre[idx - 1] * nums[idx - 1]
+        next = [1] * len(nums)
+        for idx in range(len(nums) - 1, -1, -1):
+            if idx == len(nums) - 1:
+                next[idx] = 1
+            else:
+                next[idx] = next[idx+1] * nums[idx + 1]
         ans = [1] * len(nums)
-        for i in range(len(nums)):
-            for j in range(len(nums)):
-                if i != j:
-                    ans[i] *= nums[j]
+        for idx in range(0, len(nums)):
+            ans[idx] = pre[idx] * next[idx]
         return ans
 
 
