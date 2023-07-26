@@ -4,12 +4,18 @@ from typing import List
 class Solution:
     def maxOperations(self, nums: List[int], k: int) -> int:
         count = 0
-        for i in range(len(nums) - 1):
-            for j in range(i + 1, len(nums)):
-                if nums[i] + nums[j] == k:
-                    nums.pop(i)
-                    nums.pop(j - 1)
-                    count += 1
+        nums.sort()
+        left = 0
+        right = len(nums) - 1
+        while left < right:
+            if nums[left] + nums[right] > k:
+                right -= 1
+            elif nums[left] + nums[right] < k:
+                left += 1
+            else:
+                count += 1
+                left += 1
+                right -= 1
         return count
 
 
