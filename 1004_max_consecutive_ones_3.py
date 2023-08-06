@@ -9,26 +9,25 @@ class Solution:
             count = 0
             if nums[i] == 0:
                 current_k -= 1
-                if current_k > 0:
+                if current_k >= 0:
                     count += 1
                     maximun = max(maximun, count)
                 else:
-                    maximun = max(maximun, count)
                     continue
             else:
                 count += 1
-            for j in range(i, len(nums)):
+            for j in range(i+1, len(nums)):
                 if nums[j] == 0:
                     current_k -= 1
-                    if current_k > 0:
+                    if current_k >= 0:
                         count += 1
                         maximun = max(maximun, count)
                     else:
-                        maximun = max(maximun, count)
                         break
                 else:
                     count += 1
                     maximun = max(maximun, count)
+
         return maximun
 
 
