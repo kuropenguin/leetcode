@@ -3,7 +3,12 @@ from typing import List
 
 class Solution:
     def largestAltitude(self, gain: List[int]) -> int:
-        return 0
+        result = 0
+        total = 0
+        for i in range(0, len(gain)):
+            total += gain[i]
+            result = max(result, total)
+        return result
 
 
 solution = Solution()
