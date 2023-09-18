@@ -3,7 +3,13 @@ from typing import List
 
 class Solution:
     def findDifference(self, nums1: List[int], nums2: List[int]) -> List[List[int]]:
-      return []
+        num1_set = set(nums1)
+        num2_set = set(nums2)
+        for num in nums1:
+            if num in num2_set:
+                num1_set.remove(num)
+                num2_set.remove(num)
+        return [list(num1_set), list(num2_set)]
 
 
 solution = Solution()
