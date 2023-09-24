@@ -3,7 +3,19 @@ from typing import List
 
 class Solution:
     def uniqueOccurrences(self, arr: List[int]) -> bool:
-        return False
+        dict = {}
+        for i in arr:
+            if i in dict:
+                dict[i] += 1
+            else:
+                dict[i] = 1
+        values = {}
+        for value in dict.values():
+            if value in values:
+                return False
+            else:
+                values[value] = 1
+        return True
 
 
 solution = Solution()
