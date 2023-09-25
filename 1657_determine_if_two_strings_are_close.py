@@ -3,7 +3,24 @@ from typing import List
 
 class Solution:
     def closeStrings(self, word1: str, word2: str) -> bool:
-        return True
+        w1_dict = {}
+        for w in word1:
+            if w in w1_dict:
+                w1_dict[w] += 1
+            else:
+                w1_dict[w] = 1
+        w2_dict = {}
+        for w in word2:
+            if w in w2_dict:
+                w2_dict[w] += 1
+            else:
+                w2_dict[w] = 1
+        for w in word1:
+            if w not in w2_dict:
+                return False
+        w1_values = sorted(w1_dict.values())
+        w2_values = sorted(w2_dict.values())
+        return w1_values == w2_values
 
 
 solution = Solution()
