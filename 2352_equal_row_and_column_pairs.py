@@ -3,6 +3,19 @@ from typing import List
 
 class Solution:
     def equalPairs(self, grid: List[List[int]]) -> int:
+        col_list = []
+        for idx in range(0, len(grid)):
+            col = []
+            for list in grid:
+                col.append(list[idx])
+            col_list.append(col)
+
+        count = 0
+        for row in grid:
+            for col in col_list:
+                if row == col:
+                    count += 1
+        return count
 
 
 solution = Solution()
