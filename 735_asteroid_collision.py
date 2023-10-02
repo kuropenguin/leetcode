@@ -3,23 +3,28 @@ from typing import List
 
 class Solution:
     def asteroidCollision(self, asteroids: List[int]) -> List[int]:
-        plus_asteroids = []
-        minus_asteroids = []
-        for idx in range(len(asteroids)):
-            asteroid = asteroids[idx]
-            if asteroid > 0:
-                plus_asteroids.append({idx: asteroid})
+        result = []
+        for new_asteroid in asteroids:
+            if new_asteroid > 0:
+                result.append(new_asteroid)
             else:
-                minus_asteroids.append({idx: asteroid})
-        while len(plus_asteroids) > 0 and len(minus_asteroids) > 0:
-            plus_asteroid_dict = plus_asteroids.pop()
-            minus_asteroid_dict = minus_asteroids.pop()
-
-            plus_asteroid_idx = list(plus_asteroid_dict.keys())[0]
-            minus_asteroid_idx = list(minus_asteroid_dict.keys())[0]
-            plus_asteroid = list(plus_asteroid_dict.values())[0]
-            minus_asteroid = list(minus_asteroid_dict.values())[0]
-        return plus_asteroids + minus_asteroids
+                minus_asteroid = new_asteroid
+                while True:
+                    if len(result) == 0:
+                        result.append(minus_asteroid)
+                        break
+                    old_asteroid = result.pop()
+                    if old_asteroid < 0:
+                        result.append(old_asteroid)
+                        result.append(minus_asteroid)
+                        break
+                    plus_asteroid = old_asteroid
+                    if abs(minus_asteroid) == abs(plus_asteroid):
+                        break
+                    if abs(plus_asteroid) > abs(minus_asteroid):
+                        result.append(plus_asteroid)
+                        break
+        return result
 
 
 solution = Solution()
