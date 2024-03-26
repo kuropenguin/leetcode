@@ -3,40 +3,21 @@ from typing import List
 
 class Solution:
     def decodeString(self, s: str) -> str:
-        idx_pair_map = {}
-        left_parenthesis = []
-        for idx in range(len(s)):
-            if s[idx] == "[":
-                left_parenthesis.append(idx)
-            elif s[idx] == "]":
-                left_idx = left_parenthesis.pop()
-                idx_pair_map[left_idx] = idx
-        result = ""
-        num_str = ""
-        idx = 0
-        while idx < len(s):
-            char = s[idx]
-            if char.isdigit():
-                num_str += char
-            elif char == "[":
-                right_idx = idx_pair_map[idx]
-                left_idx = idx + 1
-                sub_str = s[left_idx:right_idx]
-                if num_str == "":
-                    result += self.decodeString(s=sub_str)
-                else:
-                    num = int(num_str)
-                    result += num * self.decodeString(s=sub_str)
-                    num_str = ""
-                idx = right_idx + 1
-                continue
-            elif char == "]":
-                result += char
-                idx += 1
-                continue
+        # please write code
+        # here
+        stack = []
+        for char in s:
+            if char == "]":
+                temp = ""
+                while stack[-1] != "[":
+                    temp = stack.pop() + temp
+                stack.pop()
+                num = ""
+                while len(stack) > 0 and stack[-1].isdigit():
+                    num = stack.pop() + num
+                stack.append(int(num) * temp)
             else:
-                result += char
-            idx += 1
+                stack.append(char)
         return result
 
 
